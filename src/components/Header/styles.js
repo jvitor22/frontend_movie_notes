@@ -42,7 +42,9 @@ export const Profile = styled.div`
     line-height: 1.8rem;
   }
 
-    > a {
+    > button {
+    background: none;
+    border: none;
     color: ${({ theme }) => theme.COLORS.GRAY_100};
     font-weight: 400;
     font-size: 14px;
