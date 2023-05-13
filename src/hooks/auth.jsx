@@ -13,8 +13,8 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password })
       const { user, token } = response.data
 
-      localStorage.setItem("@movienotes:user", JSON.stringify(user))
-      localStorage.setItem("@movienotes:token", token)
+      localStorage.setItem("@moviesnotes:user", JSON.stringify(user))
+      localStorage.setItem("@moviesnotes:token", token)
       
       api.defaults.headers.authorization = `Bearer ${token}`
       setData({ user, token })
@@ -28,15 +28,15 @@ function AuthProvider({ children }) {
   }
 
   function signOut() {
-    localStorage.removeItem("@movienotes:token")
-    localStorage.removeItem("@movienotes:user")
+    localStorage.removeItem("@moviesnotes:token")
+    localStorage.removeItem("@moviesnotes:user")
 
     setData({})
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("@movienotes:token")
-    const user = localStorage.getItem("@movienotes:user")
+    const token = localStorage.getItem("@moviesnotes:token")
+    const user = localStorage.getItem("@moviesnotes:user")
 
     if (token && user) {
       api.defaults.headers.authorization = `Bearer ${token}`
