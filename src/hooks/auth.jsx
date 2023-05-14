@@ -13,8 +13,8 @@ function AuthProvider({ children }) {
       const response = await api.post("/sessions", { email, password })
       const { user, token } = response.data
 
-      localStorage.setItem("@moviesnotes:user", JSON.stringify(user))
-      localStorage.setItem("@moviesnotes:token", token)
+      localStorage.setItem("@movienotes:user", JSON.stringify(user))
+      localStorage.setItem("@movienotes:token", token)
       
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({ user, token })
@@ -28,8 +28,8 @@ function AuthProvider({ children }) {
   }
 
   function signOut() {
-    localStorage.removeItem("@moviesnotes:token")
-    localStorage.removeItem("@moviesnotes:user")
+    localStorage.removeItem("@movienotes:token")
+    localStorage.removeItem("@movienotes:user")
 
     setData({})
   }
@@ -43,13 +43,13 @@ function AuthProvider({ children }) {
         const response = await api.patch("/users/avatar", fileUploadForm)
         user.avatar = response.data.avatar
       }
-      
+
       await api.put("/users", user)
 
       user.password = ""
       user.old_password = ""
 
-      localStorage.setItem("@moviesnotes:user", JSON.stringify(user))
+      localStorage.setItem("@movienotes:user", JSON.stringify(user))
 
       setData({ user, token: data.token})
       alert("Perfil atualizado!")
@@ -64,8 +64,8 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("@moviesnotes:token")
-    const user = localStorage.getItem("@moviesnotes:user")
+    const token = localStorage.getItem("@movienotes:token")
+    const user = localStorage.getItem("@movienotes:user")
 
     if (token && user) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
